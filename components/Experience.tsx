@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import {
   SiReact,
   SiDjango,
@@ -19,6 +20,17 @@ import {
 } from "react-icons/si";
 import { Bot } from "lucide-react";
 
+const AzureIcon = () => (
+  <div className="relative w-9 h-9">
+    <Image
+      src="/tech/azure.svg"
+      alt="Azure"
+      fill
+      className="object-contain"
+    />
+  </div>
+);
+
 const experiences = [
   {
     id: "exp1",
@@ -36,7 +48,7 @@ const experiences = [
       { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
       { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
       { name: "AWS (EC2, S3, Amplify, Lightsail)", icon: SiAmazon, color: "#FF9900" },
-      { name: "Azure", icon: SiAmazon, color: "#007FFF" },
+      { name: "Azure", icon: AzureIcon, color: "#007FFF" },
       { name: "Next.js", icon: SiNextdotjs, color: "#ffffff" },
       { name: "WhatsApp Business API", icon: SiWhatsapp, color: "#25D366" },
       { name: "WhatsApp Chatbot", icon: Bot, color: "#22c55e" },

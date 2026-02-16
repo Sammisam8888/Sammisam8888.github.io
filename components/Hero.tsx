@@ -2,111 +2,156 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
+import { FileText } from "lucide-react";
 
 export default function Hero() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end start"],
-    });
+  const containerRef = useRef<HTMLDivElement>(null);
 
-    // Layer 2: Ghost Text (Parallax + Scale + Opacity ONLY - No Blur)
-    // Moving upward slightly (-40px equivalent), scaling down 0.98
-    const ghostY = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
-    const ghostScale = useTransform(scrollYProgress, [0, 1], [1, 0.98]);
-    const ghostOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
 
-    // Layer 3: Main Content (Slight fade and scale on scroll)
-    const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
-    const contentOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  /* Parallax Layers */
+  const ghostY = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
+  const ghostOpacity = useTransform(scrollYProgress, [0, 0.5], [0.15, 0]);
 
-    // Layer 1: Background Glow Shift (Subtle)
-    const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "-5%"]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "8%"]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
-    return (
-        <section
-            ref={containerRef}
-            className="relative min-h-screen flex flex-col justify-center px-[6vw] md:pl-[10vw] md:pr-[8vw] pt-[10vh] overflow-hidden"
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "-5%"]);
+
+  return (
+    <section
+      ref={containerRef}
+      className="relative min-h-screen flex items-center px-[6vw] md:px-[10vw] overflow-hidden"
+    >
+      {/* Subtle Radial Background */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{ y: bgY }}
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_40%,rgba(255,255,255,0.025),transparent_65%)]" />
+      </motion.div>
+
+      {/* GHOST TEXT (Now Behind Everything) */}
+      <motion.div
+        style={{ y: ghostY, opacity: ghostOpacity }}
+        className="absolute top-[15%] left-1/2 -translate-x-1/2 z-0 pointer-events-none select-none"
+      >
+        <h1 className="font-extrabold text-[clamp(100px,15vw,260px)] tracking-[-0.05em] text-white/5 whitespace-nowrap">
+          SYSTEMS
+        </h1>
+      </motion.div>
+
+      {/* MAIN GRID */}
+      <motion.div
+        style={{ opacity: contentOpacity, y: contentY }}
+        className="relative z-10 grid md:grid-cols-2 gap-20 items-center w-full max-w-7xl mx-auto"
+      >
+        {/* LEFT SIDE */}
+        <div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="text-white font-mono tracking-[0.2em] text-lg uppercase"
+          >
+            Senior Full-Stack Engineer • AI Systems Architect
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="mt-6 text-[clamp(48px,6vw,84px)] font-black leading-[1.05] tracking-[-0.04em] text-white"
+          >
+            Samuel Priyatam <br />
+            <span className="text-white/60">Dash</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+            className="mt-8 text-[18px] text-white/60 max-w-[540px] leading-[1.7]"
+          >
+            Designing production-grade cloud-native systems, scalable backend
+            architectures, and AI-driven platforms with real-world deployment
+            impact.
+          </motion.p>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.6 }}
+            className="mt-12 flex items-center gap-8"
+          >
+            {/* View Work */}
+            <a
+              href="#projects"
+              className="group relative px-8 py-[14px] rounded-full text-white transition-all duration-300 overflow-hidden border border-white/10 bg-white/5 hover:bg-white/10"
+            >
+              <span className="relative z-10">View Work</span>
+            </a>
+
+            {/* Resume Minimal */}
+            <a
+              href="https://tinyurl.com/samuel-priyatam-resume"
+              target="_blank"
+              className="group relative px-8 py-[14px] rounded-full text-white transition-all duration-300 overflow-hidden border border-white/10 hover:border-white/20 hover:bg-white/5 flex items-center gap-2"
+            >
+              <FileText size={18} />
+              <span className="text-sm uppercase tracking-widest">Resume</span>
+            </a>
+          </motion.div>
+        </div>
+
+        {/* RIGHT SIDE - PROFILE IMAGE */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="hidden md:flex justify-center md:justify-end relative z-10"
         >
-            {/* Layer 1: Background Glow (Reduced & No Noise) */}
+          <div className="relative w-[320px] h-[420px]">
+
+            {/* Animated Frame */}
             <motion.div
-                className="absolute inset-0 z-0 pointer-events-none"
-                style={{ y: bgY }}
-            >
-                {/* Radial Glow - Extremely Subtle */}
-                <div
-                    className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_60%_40%,rgba(255,255,255,0.015),transparent_60%)]"
-                />
-            </motion.div>
+              animate={{ rotate: [0, 0.5, -0.5, 0] }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="absolute inset-0 border border-white/20 rounded-2xl"
+            />
 
-            {/* Layer 2: Ghost Text - Depth Authority */}
             <motion.div
-                className="absolute top-[15%] left-1/2 -translate-x-1/2 md:left-[55%] whitespace-nowrap pointer-events-none select-none z-0"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                style={{
-                    y: ghostY,
-                    scale: ghostScale,
-                    opacity: ghostOpacity
-                }}
-            >
-                <h1
-                    className="font-extrabold text-[80px] md:text-[clamp(80px,14vw,240px)] tracking-[-0.03em]"
-                    style={{ color: "rgba(255,255,255,0.02)" }}
-                >
-                    SYSTEMS ENGINEER
-                </h1>
-            </motion.div>
+              animate={{ rotate: [0, -0.5, 0.5, 0] }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="absolute inset-3 border border-white/10 rounded-2xl"
+            />
 
-            {/* Layer 3: Main Content - Left Anchored */}
-            <motion.div
-                style={{ opacity: contentOpacity, y: contentY }}
-                className="relative z-10 max-w-[900px] flex flex-col items-start"
-            >
-                <motion.h1
-                    className="text-[42px] md:text-[clamp(42px,5.5vw,80px)] font-black leading-[1.05] tracking-[-0.04em] text-[#F5F5F5] text-left"
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }} // Staggered slightly after ghost
-                >
-                    Full-Stack & AI <br className="hidden md:block" />
-                    Systems Engineer
-                </motion.h1>
+            {/* Image */}
+            <div className="absolute inset-6 rounded-2xl overflow-hidden">
+              <Image
+                src="/profile-picture-iit-kgp.jpg"
+                alt="Samuel Priyatam Dash"
+                fill
+                className="object-cover"
+              />
+            </div>
 
-                <motion.p
-                    className="mt-6 text-[16px] md:text-[clamp(16px,1.2vw,20px)] text-[#9A9A9A] max-w-[540px] leading-[1.6] font-normal text-left"
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
-                >
-                    Building production-grade intelligent systems.
-                </motion.p>
-
-                <motion.div
-                    className="mt-12 flex items-center gap-8"
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
-                >
-                    {/* Primary CTA - Engineering Authority */}
-                    <button
-                        className="group relative px-8 py-[15px] rounded-full text-[#F5F5F5] transition-all duration-300 overflow-hidden"
-                        style={{
-                            background: "rgba(255,255,255,0.06)",
-                            border: "1px solid rgba(255,255,255,0.06)",
-                        }}
-                    >
-                        <span className="relative z-10 inline-block">View Work</span>
-                        <div className="absolute inset-0 bg-[rgba(255,255,255,0.09)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </button>
-
-                    {/* Secondary CTA */}
-                    <button className="text-[#9A9A9A] hover:text-[#F5F5F5] transition-colors duration-300 font-medium">
-                        Download Resume
-                    </button>
-                </motion.div>
-            </motion.div>
-        </section>
-    );
+          </div>
+        </motion.div>
+      </motion.div>
+    </section>
+  );
 }
