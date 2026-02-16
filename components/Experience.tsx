@@ -1,13 +1,5 @@
 "use client";
 
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useSpring,
-  useVelocity,
-} from "framer-motion";
-import { useRef } from "react";
 import CountUp from "react-countup";
 import {
   SiReact,
@@ -39,7 +31,7 @@ const experiences = [
       </>,
       <>
         <strong>Led end-to-end development</strong> of the{" "}
-        <strong>MyFojo React Native & WhatsApp Commerce platform</strong>,
+        <strong>MyFojo React Native & WhatsApp Commerce</strong> platform,
         reducing <strong>manual work by 60%</strong>.
       </>,
       <>
@@ -66,14 +58,14 @@ const experiences = [
     bullets: [
       <>
         <strong>Built a full-stack AI web app</strong> integrating{" "}
-        <strong>LangChain and OpenAI APIs</strong> for advanced AI-driven data processing.
+        <strong>LangChain and OpenAI APIs</strong>.
       </>,
       <>
-        <strong>Automated CI/CD pipelines</strong> via GitHub Actions achieving{" "}
+        <strong>Automated CI/CD pipelines</strong> achieving{" "}
         <strong>100% successful deployments</strong>.
       </>,
       <>
-        Implemented <strong>secure JWT authentication</strong> and role-based access.
+        <strong>Implemented secure JWT authentication</strong>.
       </>,
     ],
     tech: [
@@ -91,11 +83,10 @@ const experiences = [
     bullets: [
       <>
         <strong>Developed 5+ automation modules</strong> reducing{" "}
-        <strong>manual healthcare processing by 40%</strong>.
+        <strong>manual processing by 40%</strong>.
       </>,
       <>
-        Integrated <strong>AWS Lambda + OCR + S3</strong>, improving{" "}
-        <strong>accuracy by 35%</strong>.
+        Integrated <strong>AWS Lambda + OCR + S3</strong>.
       </>,
       <>
         Designed <strong>HIPAA-compliant cloud-native systems</strong>.
@@ -113,11 +104,10 @@ const experiences = [
     date: "Jan 2025 — Mar 2025",
     bullets: [
       <>
-        Built and deployed a <strong>Flask-Docker CRM</strong> serving 100+ users,
-        reducing <strong>backend latency by 30%</strong>.
+        Built and deployed a <strong>Flask-Docker CRM</strong> serving 100+ users.
       </>,
       <>
-        Designed <strong>mortgage analytics dashboards</strong> using REST APIs.
+        Designed <strong>mortgage analytics dashboards</strong>.
       </>,
       <>
         Optimized <strong>AWS & Azure container deployments</strong>.
@@ -132,113 +122,56 @@ const experiences = [
   },
 ];
 
-export default function ExperienceUltraPro() {
-  const ref = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end end"],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 80,
-    damping: 20,
-  });
-
-  const velocity = useVelocity(scrollYProgress);
-  const glowIntensity = useTransform(velocity, [0, 1], [0.2, 0.6]);
-
+export default function ExperienceTimeline() {
   return (
-    <section
-      ref={ref}
-      className="relative bg-black text-white snap-y snap-mandatory"
-      style={{ perspective: 1200 }}
-    >
-      {/* Vertical Progress Bar */}
-      <div className="fixed left-10 top-0 h-full w-[2px] bg-white/10 z-30">
-        <motion.div
-          style={{ height: smoothProgress }}
-          className="w-full bg-white"
-        />
+    <section className="bg-black text-white py-24 px-6">
+      <div className="max-w-5xl mx-auto relative">
+
+        {/* Vertical line */}
+        <div className="absolute left-6 top-0 bottom-0 w-[2px] bg-white/10" />
+
+        {experiences.map((exp, i) => (
+          <div key={i} className="relative pl-16 mb-16">
+
+            {/* Dot */}
+            <div className="absolute left-3 top-3 w-6 h-6 rounded-full bg-white shadow-lg" />
+
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-10 rounded-2xl shadow-xl">
+
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                  <p className="text-sm text-white/40 font-mono">{exp.date}</p>
+                  <h2 className="text-3xl font-semibold mt-2">{exp.role}</h2>
+                  <p className="text-white/50">{exp.company}</p>
+                </div>
+
+                <div className="text-5xl font-bold text-white/10">
+                  <CountUp end={exp.metric} duration={2} />%
+                </div>
+              </div>
+
+              <div className="mt-6 space-y-3 text-white/70 leading-relaxed">
+                {exp.bullets.map((b, idx) => (
+                  <p key={idx}>• {b}</p>
+                ))}
+              </div>
+
+              <div className="flex gap-5 mt-6 text-2xl">
+                {exp.tech.map((tech, idx) => {
+                  const Icon = tech.icon;
+                  return (
+                    <div key={idx} style={{ color: tech.color }}>
+                      <Icon />
+                    </div>
+                  );
+                })}
+              </div>
+
+            </div>
+          </div>
+        ))}
+
       </div>
-
-      {experiences.map((exp, index) => (
-        <motion.div
-          key={index}
-          className="relative min-h-screen snap-start flex items-center px-[12vw]"
-          style={{
-            filter: "blur(0px)",
-          }}
-        >
-          {/* Ambient Radial Glow */}
-          <motion.div
-            style={{
-              opacity: glowIntensity,
-            }}
-            className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),transparent_60%)]"
-          />
-
-          {/* Giant Metric */}
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 0.06 }}
-            transition={{ duration: 1 }}
-            className="absolute text-[26vw] font-bold select-none"
-          >
-            <CountUp end={exp.metric} duration={2} />
-            %
-          </motion.div>
-
-          {/* Glass Card */}
-          <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            className="relative max-w-[900px] backdrop-blur-xl bg-white/5 border border-white/10 p-10 rounded-3xl"
-          >
-            <p className="text-sm font-mono text-white/40">{exp.date}</p>
-
-            <h2 className="mt-3 text-4xl font-semibold tracking-tight">
-              {exp.role}
-            </h2>
-
-            <p className="text-white/50 mb-8">{exp.company}</p>
-
-            {/* Bullets staggered */}
-            <div className="space-y-4 text-lg leading-[1.8]">
-              {exp.bullets.map((b, i) => (
-                <motion.p
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.15 }}
-                  className="text-white/70"
-                >
-                  • {b}
-                </motion.p>
-              ))}
-            </div>
-
-            {/* Floating Tech Icons */}
-            <div className="flex gap-6 mt-8 text-3xl">
-              {exp.tech.map((tech, i) => {
-                const Icon = tech.icon;
-                return (
-                  <motion.div
-                    key={i}
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    transition={{ type: "spring", stiffness: 200 }}
-                    style={{ color: tech.color }}
-                    className="drop-shadow-lg"
-                  >
-                    <Icon />
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.div>
-        </motion.div>
-      ))}
     </section>
   );
 }
