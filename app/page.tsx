@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import Formation from "@/components/Formation";
+import Experience from "@/components/Experience";
 
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <main>
       <Hero />
       <Formation />
+      <Experience />
     </main>
   );
 }

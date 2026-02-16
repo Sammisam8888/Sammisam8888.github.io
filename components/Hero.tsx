@@ -26,7 +26,7 @@ export default function Hero() {
     return (
         <section
             ref={containerRef}
-            className="relative min-h-screen flex flex-col justify-center px-[6vw] md:pl-[10vw] md:pr-[8vw] pt-[10vh] overflow-hidden bg-[#0A0A0A]"
+            className="relative min-h-screen flex flex-col justify-center px-[6vw] md:pl-[10vw] md:pr-[8vw] pt-[10vh] overflow-hidden"
         >
             {/* Layer 1: Background Glow (Reduced & No Noise) */}
             <motion.div

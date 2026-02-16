@@ -57,7 +57,7 @@ export default function Formation() {
     return (
         <section
             ref={containerRef}
-            className="relative h-[550vh] bg-[#0A0A0A]"
+            className="relative h-[550vh]"
 
         >
             <div className="sticky top-0 h-screen flex items-start justify-center pt-[8vh] px-[8vw]">
@@ -79,13 +79,14 @@ export default function Formation() {
                     </motion.h2>
 
                     {/* Narrative Blocks */}
-                    <div className="relative mt-24 min-h-[420px]">
+                    <div className="relative mt-10 h-[45vh] flex items-center">
 
 
                         {/* Block 1 */}
                         <motion.div
                             style={{ opacity: block1Opacity, y: block1Y }}
-                            className="absolute space-y-6 text-white/70 text-[18px] leading-[1.8]"
+                            className="absolute inset-0 flex flex-col justify-center space-y-6 text-white/70 text-[18px] leading-[1.8]"
+
                         >
                             <p>
                                 Currently pursuing a Bachelor of Technology in Computer Science &
