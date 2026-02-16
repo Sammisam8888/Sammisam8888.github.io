@@ -106,7 +106,7 @@ const experiences = [
 
 export default function ExperienceTimeline() {
   const [active, setActive] = useState("exp1");
-  const refs = useRef({});
+  const refs = useRef<{ [key: string]: HTMLElement | null }>({});
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -127,7 +127,7 @@ export default function ExperienceTimeline() {
     return () => observer.disconnect();
   }, []);
 
-  const scrollToSection = (id) => {
+  const scrollToSection = (id: string) => {
     const element = refs.current[id];
     if (!element) return;
 
@@ -184,7 +184,7 @@ export default function ExperienceTimeline() {
             <div
               key={exp.id}
               id={exp.id}
-              ref={(el) => (refs.current[exp.id] = el)}
+              ref={(el) => { refs.current[exp.id] = el; }}
               className="relative pl-20 mb-32"
             >
               <div className="absolute left-5 top-8 w-5 h-5 bg-white rounded-full" />
