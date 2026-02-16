@@ -1,6 +1,6 @@
 "use client";
 
-import CountUp from "react-countup";
+import { useEffect, useRef, useState } from "react";
 import {
   SiReact,
   SiDjango,
@@ -20,157 +20,194 @@ import {
 
 const experiences = [
   {
-    metric: 45,
+    id: "exp1",
+    dateLabel: "Aug 2025 - Dec 2025",
     role: "Lead SDE (Full-Stack & DevOps)",
     company: "OPM Corporation",
-    date: "Aug 2025 — Dec 2025",
-    bullets: [
-      <>
-        <strong>Architected cloud-native Azure deployments</strong>, improving{" "}
-        <strong>scalability and backend performance by 45%</strong> across three live projects.
-      </>,
-      <>
-        <strong>Led end-to-end development</strong> of the{" "}
-        <strong>MyFojo React Native & WhatsApp Commerce</strong> platform,
-        reducing <strong>manual work by 60%</strong>.
-      </>,
-      <>
-        <strong>Engineered SEO-driven backend modules</strong>, increasing{" "}
-        <strong>load speed and search visibility by 30%</strong>.
-      </>,
-    ],
+    statement:
+      "Architected and deployed scalable full-stack production systems across cloud-native infrastructure, leading engineering decisions that improved backend performance by 45% while optimizing operational complexity.",
+    metric: "45%",
     tech: [
-      { icon: SiReact, color: "#61DAFB" },
-      { icon: SiDjango, color: "#092E20" },
-      { icon: SiExpress, color: "#ffffff" },
-      { icon: SiFlask, color: "#ffffff" },
-      { icon: SiMongodb, color: "#47A248" },
-      { icon: SiAmazon, color: "#FF9900" },
-      { icon: SiNextdotjs, color: "#ffffff" },
-      { icon: SiWhatsapp, color: "#25D366" },
+      { name: "React Native", icon: SiReact, color: "#61DAFB" },
+      { name: "Django", icon: SiDjango, color: "#092E20" },
+      { name: "Express", icon: SiExpress, color: "#ffffff" },
+      { name: "Flask", icon: SiFlask, color: "#ffffff" },
+      { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+      { name: "AWS", icon: SiAmazon, color: "#FF9900" },
+      { name: "Next.js", icon: SiNextdotjs, color: "#ffffff" },
+      { name: "WhatsApp API", icon: SiWhatsapp, color: "#25D366" },
     ],
   },
   {
-    metric: 100,
-    role: "AI Full-Stack Intern",
-    company: "EU Analytics (WNS Global Services)",
-    date: "Jul 2025 — Aug 2025",
-    bullets: [
-      <>
-        <strong>Built a full-stack AI web app</strong> integrating{" "}
-        <strong>LangChain and OpenAI APIs</strong>.
-      </>,
-      <>
-        <strong>Automated CI/CD pipelines</strong> achieving{" "}
-        <strong>100% successful deployments</strong>.
-      </>,
-      <>
-        <strong>Implemented secure JWT authentication</strong>.
-      </>,
-    ],
+    id: "exp2",
+    dateLabel: "Jul 2025 - Aug 2025",
+    role: "AI Full-Stack Engineer",
+    company: "WNS Global Services",
+    statement:
+      "Built scalable AI-driven production systems integrating LLM pipelines into full-stack architectures with automated CI/CD and secure authentication layers.",
+    metric: "100%",
     tech: [
-      { icon: SiAngular, color: "#DD0031" },
-      { icon: SiFlask, color: "#ffffff" },
-      { icon: SiOpenai, color: "#10A37F" },
-      { icon: SiExpress, color: "#ffffff" },
+      { name: "Angular", icon: SiAngular, color: "#DD0031" },
+      { name: "Flask", icon: SiFlask, color: "#ffffff" },
+      { name: "OpenAI", icon: SiOpenai, color: "#10A37F" },
+      { name: "Express", icon: SiExpress, color: "#ffffff" },
     ],
   },
   {
-    metric: 40,
-    role: "Cloud Platform Developer Intern",
+    id: "exp3",
+    dateLabel: "May 2025 - Jul 2025",
+    role: "Cloud Platform Developer",
     company: "Inovaare Clouds",
-    date: "May 2025 — Jul 2025",
-    bullets: [
-      <>
-        <strong>Developed 5+ automation modules</strong> reducing{" "}
-        <strong>manual processing by 40%</strong>.
-      </>,
-      <>
-        Integrated <strong>AWS Lambda + OCR + S3</strong>.
-      </>,
-      <>
-        Designed <strong>HIPAA-compliant cloud-native systems</strong>.
-      </>,
-    ],
+    statement:
+      "Engineered serverless cloud-native automation systems leveraging AWS infrastructure for scalable enterprise-grade workflow optimization.",
+    metric: "40%",
     tech: [
-      { icon: SiAmazon, color: "#FF9900" },
-      { icon: SiPython, color: "#3776AB" },
+      { name: "AWS", icon: SiAmazon, color: "#FF9900" },
+      { name: "Python", icon: SiPython, color: "#3776AB" },
     ],
   },
   {
-    metric: 30,
-    role: "Backend Developer Intern",
+    id: "exp4",
+    dateLabel: "Jan 2025 - Mar 2025",
+    role: "Backend Engineer",
     company: "Codecis AI",
-    date: "Jan 2025 — Mar 2025",
-    bullets: [
-      <>
-        Built and deployed a <strong>Flask-Docker CRM</strong> serving 100+ users.
-      </>,
-      <>
-        Designed <strong>mortgage analytics dashboards</strong>.
-      </>,
-      <>
-        Optimized <strong>AWS & Azure container deployments</strong>.
-      </>,
-    ],
+    statement:
+      "Developed containerized production-grade backend systems with optimized database pipelines and multi-cloud deployment architecture.",
+    metric: "30%",
     tech: [
-      { icon: SiFlutter, color: "#02569B" },
-      { icon: SiReact, color: "#61DAFB" },
-      { icon: SiFastapi, color: "#009688" },
-      { icon: SiPostgresql, color: "#336791" },
+      { name: "Flutter", icon: SiFlutter, color: "#02569B" },
+      { name: "React Native", icon: SiReact, color: "#61DAFB" },
+      { name: "FastAPI", icon: SiFastapi, color: "#009688" },
+      { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
     ],
   },
 ];
 
 export default function ExperienceTimeline() {
+  const [active, setActive] = useState("exp1");
+  const refs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+          }
+        });
+      },
+      {
+        rootMargin: "-45% 0px -45% 0px",
+        threshold: 0,
+      }
+    );
+
+    Object.values(refs.current).forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    const element = refs.current[id];
+    if (!element) return;
+
+    const y =
+      element.getBoundingClientRect().top +
+      window.pageYOffset -
+      window.innerHeight / 2 +
+      element.offsetHeight / 2;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
+
   return (
-    <section className="bg-black text-white py-24 px-6">
-      <div className="max-w-5xl mx-auto relative">
+    <section className="py-32 px-6 relative">
 
-        {/* Vertical line */}
-        <div className="absolute left-6 top-0 bottom-0 w-[2px] bg-white/10" />
+      <div className="max-w-7xl mx-auto grid md:grid-cols-[240px_1fr] gap-20">
 
-        {experiences.map((exp, i) => (
-          <div key={i} className="relative pl-16 mb-16">
+        {/* CENTERED STICKY TIMELINE */}
+        <div className="relative">
+          <div className="sticky top-1/2 -translate-y-1/2 space-y-5">
 
-            {/* Dot */}
-            <div className="absolute left-3 top-3 w-6 h-6 rounded-full bg-white shadow-lg" />
+            {experiences.map((exp) => (
+              <button
+                key={exp.id}
+                onClick={() => scrollToSection(exp.id)}
+                className={`w-full px-5 py-3 rounded-xl backdrop-blur-xl border border-white/10 transition ${
+                  active === exp.id
+                    ? "bg-white/10 text-white shadow-lg"
+                    : "bg-white/5 text-gray-400 hover:bg-white/10"
+                }`}
+              >
+                {exp.dateLabel}
+              </button>
+            ))}
 
-            <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-10 rounded-2xl shadow-xl">
-
-              <div className="flex items-center justify-between flex-wrap gap-4">
-                <div>
-                  <p className="text-sm text-white/40 font-mono">{exp.date}</p>
-                  <h2 className="text-3xl font-semibold mt-2">{exp.role}</h2>
-                  <p className="text-white/50">{exp.company}</p>
-                </div>
-
-                <div className="text-5xl font-bold text-white/10">
-                  <CountUp end={exp.metric} duration={2} />%
-                </div>
-              </div>
-
-              <div className="mt-6 space-y-3 text-white/70 leading-relaxed">
-                {exp.bullets.map((b, idx) => (
-                  <p key={idx}>• {b}</p>
-                ))}
-              </div>
-
-              <div className="flex gap-5 mt-6 text-2xl">
-                {exp.tech.map((tech, idx) => {
-                  const Icon = tech.icon;
-                  return (
-                    <div key={idx} style={{ color: tech.color }}>
-                      <Icon />
-                    </div>
-                  );
-                })}
-              </div>
-
-            </div>
           </div>
-        ))}
+        </div>
 
+        {/* EXPERIENCE CONTENT */}
+        <div className="relative">
+
+          <div className="absolute left-8 top-0 bottom-0 w-[2px] bg-white/10" />
+
+          {experiences.map((exp) => (
+            <div
+              key={exp.id}
+              id={exp.id}
+              ref={(el) => (refs.current[exp.id] = el)}
+              className="relative pl-20 mb-32"
+            >
+
+              <div className="absolute left-5 top-8 w-5 h-5 bg-white rounded-full" />
+
+              <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-12 rounded-2xl shadow-xl relative">
+
+                <div className="absolute right-10 top-8 text-6xl font-bold text-white/10">
+                  {exp.metric}
+                </div>
+
+                <p className="text-sm text-gray-400">{exp.dateLabel}</p>
+
+                <h2 className="text-3xl font-semibold mt-2">
+                  {exp.role}
+                </h2>
+
+                <p className="text-gray-500 mb-8">
+                  {exp.company}
+                </p>
+
+                <p className="text-base text-gray-300 leading-relaxed max-w-3xl">
+                  {exp.statement}
+                </p>
+
+                <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-8">
+                  {exp.tech.map((tech, idx) => {
+                    const Icon = tech.icon;
+                    return (
+                      <div
+                        key={idx}
+                        className="flex flex-col items-center bg-white/5 border border-white/10 p-6 rounded-xl hover:bg-white/10 transition"
+                      >
+                        <Icon
+                          className="text-4xl"
+                          style={{ color: tech.color }}
+                        />
+                        <p className="mt-3 text-sm text-gray-300 font-medium">
+                          {tech.name}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+
+              </div>
+            </div>
+          ))}
+
+        </div>
       </div>
     </section>
   );
