@@ -215,22 +215,28 @@ export default function ExperienceTimeline() {
                   {exp.statement}
                 </p>
 
-                <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
                   {exp.tech.map((tech, idx) => {
                     const Icon = tech.icon;
                     return (
                       <div
                         key={idx}
-                        className="flex flex-col items-center bg-white/5 border border-white/10 p-6 rounded-xl hover:bg-white/10 transition"
+                        className="flex flex-col items-center bg-white/5 border border-white/10 px-4 py-4 rounded-lg hover:bg-white/10 transition"
                       >
-                        <Icon className="text-4xl" style={{ color: tech.color }} />
-                        <p className="mt-3 text-sm text-gray-300 font-medium text-center">
+                        <Icon
+                          className="text-2xl"
+                          style={{ color: tech.color }}
+                        />
+                        <p className="mt-2 text-xs text-gray-300 font-medium text-center leading-tight">
                           {tech.name}
                         </p>
                       </div>
                     );
                   })}
                 </div>
+
+
+
 
               </div>
             </div>
