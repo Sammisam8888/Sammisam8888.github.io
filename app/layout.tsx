@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import BackgroundFX from "@/components/BackgroundFX";
+import Cursor from "@/components/Cursor";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -78,8 +79,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased text-foreground relative`}
       >
         <BackgroundFX />
+        <Cursor />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );
 }
+

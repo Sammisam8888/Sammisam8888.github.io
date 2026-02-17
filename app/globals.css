@@ -36,4 +36,8 @@ section {
   scroll-snap-align: start;
 }
 
+* {
+  cursor: none !important;
+}
+
 
