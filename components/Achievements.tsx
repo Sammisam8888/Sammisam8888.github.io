@@ -82,10 +82,10 @@ export default function Achievements() {
 
       {/* Header */}
       <div className="text-center mb-24">
-        <h2 className="text-5xl font-bold tracking-tight text-white">
+        <h2 className="text-5xl font-bold tracking-tight text-foreground">
           Honors & Achievements
         </h2>
-        <p className="text-white/40 mt-4">
+        <p className="text-muted-foreground mt-4">
           Competitive Excellence • National Recognition • Innovation Leadership
         </p>
       </div>
@@ -98,7 +98,7 @@ export default function Achievements() {
             key={index}
             whileHover={{ y: -6 }}
             transition={{ type: "spring", stiffness: 200 }}
-            className="relative backdrop-blur-xl bg-white/5 border border-white/10 p-8 rounded-2xl group"
+            className="relative backdrop-blur-xl bg-card border border-border p-8 rounded-2xl group shadow-sm"
           >
             <div className="flex items-start gap-4">
 
@@ -112,11 +112,11 @@ export default function Achievements() {
 
               {/* Content */}
               <div>
-                <h3 className="text-lg font-semibold text-white leading-tight">
+                <h3 className="text-lg font-semibold text-foreground leading-tight">
                   {item.title}
                 </h3>
 
-                <p className="text-white/60 text-sm mt-2 leading-relaxed">
+                <p className="text-muted-foreground text-sm mt-2 leading-relaxed">
                   {item.description}
                 </p>
 
@@ -125,7 +125,7 @@ export default function Achievements() {
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute top-8 right-8 text-white/40 hover:text-blue-400 transition-colors"
+                    className="absolute top-8 right-8 text-muted-foreground hover:text-blue-400 transition-colors"
                     title="View Credential"
                   >
                     <ExternalLink size={24} />

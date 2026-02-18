@@ -57,10 +57,10 @@ export default function TrainingCourses() {
 
       {/* Header */}
       <div className="text-center mb-20">
-        <h2 className="text-5xl md:text-6xl font-semibold tracking-tight text-white">
+        <h2 className="text-5xl md:text-6xl font-semibold tracking-tight text-foreground">
           Training & Certifications
         </h2>
-        <p className="text-white/40 mt-6 text-lg">
+        <p className="text-muted-foreground mt-6 text-lg">
           Continuous Learning • Competitive Growth
         </p>
       </div>
@@ -73,11 +73,11 @@ export default function TrainingCourses() {
           onClick={() => scroll("left")}
           className="absolute -left-6 top-1/2 -translate-y-1/2 
                  w-12 h-12 rounded-full 
-                 bg-white/5 border border-white/10 
+                 bg-secondary border border-border 
                  backdrop-blur-xl flex items-center justify-center 
-                 hover:bg-white/10 transition z-20"
+                 hover:bg-accent transition z-20 shadow-md"
         >
-          <ChevronLeft className="text-white/70" />
+          <ChevronLeft className="text-muted-foreground" />
         </button>
 
         {/* RIGHT ARROW */}
@@ -85,11 +85,11 @@ export default function TrainingCourses() {
           onClick={() => scroll("right")}
           className="absolute -right-6 top-1/2 -translate-y-1/2 
                  w-12 h-12 rounded-full 
-                 bg-white/5 border border-white/10 
+                 bg-secondary border border-border 
                  backdrop-blur-xl flex items-center justify-center 
-                 hover:bg-white/10 transition z-20"
+                 hover:bg-accent transition z-20 shadow-md"
         >
-          <ChevronRight className="text-white/70" />
+          <ChevronRight className="text-muted-foreground" />
         </button>
 
         {/* Sliding Container */}
@@ -104,36 +104,36 @@ export default function TrainingCourses() {
               whileHover={{ y: -8 }}
               transition={{ type: "spring", stiffness: 200 }}
               className="min-w-[380px] max-w-[380px] h-[420px] rounded-3xl p-12
-                     bg-gradient-to-b from-white/[0.06] to-white/[0.03]
-                     border border-white/10 backdrop-blur-xl
-                     hover:border-white/20 transition-all duration-500
-                     flex flex-col justify-between relative"
+                     bg-card
+                     border border-border backdrop-blur-xl
+                     hover:border-foreground/20 transition-all duration-500
+                     flex flex-col justify-between relative shadow-sm"
             >
               <div className="absolute inset-0 rounded-3xl 
-                          bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_60%)]
+                          bg-gradient-to-tr from-transparent to-primary/5
                           opacity-0 hover:opacity-100 transition duration-500" />
 
               <div className="relative z-10">
-                <h3 className="text-3xl font-semibold text-white">
+                <h3 className="text-3xl font-semibold text-foreground">
                   {course.title}
                 </h3>
 
-                <p className="text-white/60 text-lg mt-3">
+                <p className="text-muted-foreground text-lg mt-3">
                   {course.subtitle}
                 </p>
 
-                <p className="text-white/50 mt-6 leading-relaxed">
+                <p className="text-muted-foreground mt-6 leading-relaxed">
                   {course.description}
                 </p>
               </div>
 
               <div className="relative z-10 flex items-center justify-between mt-12">
-                <span className="text-white font-medium">
+                <span className="text-primary font-medium">
                   View Certificate
                 </span>
                 <ExternalLink
                   size={20}
-                  className="text-white/40 hover:text-white transition"
+                  className="text-muted-foreground hover:text-foreground transition"
                 />
               </div>
             </motion.a>

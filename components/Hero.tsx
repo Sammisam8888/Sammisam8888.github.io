@@ -32,7 +32,7 @@ export default function Hero() {
         className="absolute inset-0 pointer-events-none z-0"
         style={{ y: bgY }}
       >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_40%,rgba(255,255,255,0.025),transparent_65%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_40%,rgb(var(--foreground)/0.03),transparent_65%)]" />
       </motion.div>
 
       {/* GHOST TEXT (Now Behind Everything) */}
@@ -40,7 +40,7 @@ export default function Hero() {
         style={{ y: ghostY, opacity: ghostOpacity }}
         className="absolute top-[15%] left-1/2 -translate-x-1/2 z-0 pointer-events-none select-none"
       >
-        <h1 className="font-extrabold text-[clamp(100px,15vw,260px)] tracking-[-0.05em] text-white/5 whitespace-nowrap">
+        <h1 className="font-extrabold text-[clamp(100px,15vw,260px)] tracking-[-0.05em] text-foreground/5 whitespace-nowrap">
           SYSTEMS
         </h1>
       </motion.div>
@@ -56,7 +56,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-white font-mono tracking-[0.2em] text-lg uppercase"
+            className="text-primary font-mono tracking-[0.2em] text-lg uppercase"
           >
             Senior Full-Stack Engineer • AI Systems Architect
           </motion.p>
@@ -65,17 +65,17 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="mt-6 text-[clamp(40px,8vw,84px)] font-black leading-[1.05] tracking-[-0.04em] text-white"
+            className="mt-6 text-[clamp(40px,8vw,84px)] font-black leading-[1.05] tracking-[-0.04em] text-foreground"
           >
             Samuel Priyatam <br />
-            <span className="text-white/60">Dash</span>
+            <span className="text-muted-foreground">Dash</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="mt-8 text-[18px] text-white/60 max-w-[540px] leading-[1.7]"
+            className="mt-8 text-[18px] text-muted-foreground max-w-[540px] leading-[1.7]"
           >
             Designing production-grade cloud-native systems, scalable backend
             architectures, and AI-driven platforms with real-world deployment
@@ -92,7 +92,7 @@ export default function Hero() {
             {/* View Work */}
             <a
               href="#projects"
-              className="group relative px-8 py-[14px] rounded-full text-white transition-all duration-300 overflow-hidden border border-white/10 bg-white/5 hover:bg-white/10"
+              className="group relative px-8 py-[14px] rounded-full text-primary-foreground transition-all duration-300 overflow-hidden border border-primary bg-primary hover:bg-primary/90"
             >
               <span className="relative z-10">View Work</span>
             </a>
@@ -101,7 +101,7 @@ export default function Hero() {
             <a
               href="https://tinyurl.com/samuel-priyatam-resume"
               target="_blank"
-              className="group relative px-8 py-[14px] rounded-full text-white transition-all duration-300 overflow-hidden border border-white/10 hover:border-white/20 hover:bg-white/5 flex items-center gap-2"
+              className="group relative px-8 py-[14px] rounded-full text-foreground transition-all duration-300 overflow-hidden border border-border hover:border-foreground/20 hover:bg-secondary flex items-center gap-2"
             >
               <FileText size={18} />
               <span className="text-sm uppercase tracking-widest">Resume</span>
@@ -126,7 +126,7 @@ export default function Hero() {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="absolute inset-0 border border-white/20 rounded-2xl"
+              className="absolute inset-0 border border-foreground/20 rounded-2xl"
             />
 
             <motion.div
@@ -136,7 +136,7 @@ export default function Hero() {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="absolute inset-3 border border-white/10 rounded-2xl"
+              className="absolute inset-3 border border-foreground/10 rounded-2xl"
             />
 
             {/* Image */}

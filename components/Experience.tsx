@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Brain, Network } from "lucide-react";
+
 import Image from "next/image";
 import {
   SiReact,
@@ -17,6 +19,7 @@ import {
   SiFlutter,
   SiOpenai,
   SiWhatsapp,
+  SiGoogle,
 } from "react-icons/si";
 import { Bot } from "lucide-react";
 
@@ -35,7 +38,7 @@ const experiences = [
   {
     id: "exp1",
     dateLabel: "Aug 2025 - Dec 2025",
-    role: "SDE2 Project Lead (Full-Stack & DevOps)",
+    role: "SDE 2 Project Lead (Full-Stack & DevOps)",
     company: "OPM Corporation",
     statement:
       "Led client-facing full-stack architecture as Project Lead, designing scalable production systems across AWS & Azure infrastructure. Owned backend architecture, DevOps strategy, WhatsApp Business automation, and cross-team delivery while driving production reliability and cloud-native scalability.",
@@ -69,9 +72,9 @@ const experiences = [
       { name: "Flask", icon: SiFlask, color: "#ffffff" },
       { name: "Express", icon: SiExpress, color: "#ffffff" },
       { name: "OpenAI", icon: SiOpenai, color: "#10A37F" },
-      { name: "Gemini API", icon: SiOpenai, color: "#4285F4" },
-      { name: "LangChain", icon: SiOpenai, color: "#16a34a" },
-      { name: "LangGraph", icon: SiOpenai, color: "#9333ea" },
+      { name: "Gemini API", icon: SiGoogle, color: "#4285F4" },
+      { name: "LangChain", icon: Brain, color: "#16a34a" },
+      { name: "LangGraph", icon: Network, color: "#9333ea" },
       { name: "System Architecture", icon: Bot, color: "#facc15" },
     ],
   },
@@ -160,7 +163,7 @@ export default function ExperienceTimeline() {
         <h1 className="text-5xl font-bold tracking-tight">
           Work Experience
         </h1>
-        <p className="text-gray-400 mt-4">
+        <p className="text-muted-foreground mt-4">
           Full-Stack Engineering • Cloud Architecture • AI Systems • DevOps Leadership
         </p>
       </div>
@@ -174,10 +177,10 @@ export default function ExperienceTimeline() {
               <button
                 key={exp.id}
                 onClick={() => scrollToSection(exp.id)}
-                className={`w-full px-5 py-3 rounded-xl backdrop-blur-xl border border-white/10 transition ${
+                className={`w-full px-5 py-3 rounded-xl backdrop-blur-xl border border-border transition ${
                   active === exp.id
-                    ? "bg-white/10 text-white"
-                    : "bg-white/5 text-gray-400 hover:bg-white/10"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary/50 text-muted-foreground hover:bg-secondary"
                 }`}
               >
                 {exp.dateLabel}
@@ -190,7 +193,7 @@ export default function ExperienceTimeline() {
         <div className="relative">
 
           {/* LINE PERFECTLY ALIGNED */}
-          <div className="absolute left-8 top-8 bottom-8 w-[2px] bg-white/10" />
+          <div className="absolute left-8 top-8 bottom-8 w-[2px] bg-border" />
 
           {experiences.map((exp) => (
             <div
@@ -199,19 +202,19 @@ export default function ExperienceTimeline() {
               ref={(el) => { refs.current[exp.id] = el; }}
               className="relative pl-20 mb-32"
             >
-              <div className="absolute left-5 top-8 w-5 h-5 bg-white rounded-full" />
+              <div className="absolute left-5 top-8 w-5 h-5 bg-foreground rounded-full" />
 
-              <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-12 rounded-2xl shadow-xl relative">
+              <div className="backdrop-blur-xl bg-card border border-border p-6 md:p-12 rounded-2xl shadow-sm relative">
 
-                <div className="absolute right-10 top-8 text-6xl font-bold text-white/10">
+                <div className="absolute right-10 top-8 text-6xl font-bold text-foreground/5">
                   {exp.metric}
                 </div>
 
-                <p className="text-sm text-gray-400">{exp.dateLabel}</p>
+                <p className="text-sm text-muted-foreground">{exp.dateLabel}</p>
                 <h2 className="text-3xl font-semibold mt-2">{exp.role}</h2>
-                <p className="text-gray-500 mb-8">{exp.company}</p>
+                <p className="text-muted-foreground mb-8">{exp.company}</p>
 
-                <p className="text-base text-gray-300 leading-relaxed max-w-3xl">
+                <p className="text-base text-muted-foreground leading-relaxed max-w-3xl">
                   {exp.statement}
                 </p>
 
@@ -221,13 +224,13 @@ export default function ExperienceTimeline() {
                     return (
                       <div
                         key={idx}
-                        className="flex flex-col items-center bg-white/5 border border-white/10 px-4 py-4 rounded-lg hover:bg-white/10 transition"
+                        className="flex flex-col items-center bg-secondary/50 border border-border px-4 py-4 rounded-lg hover:bg-secondary transition"
                       >
                         <Icon
                           className="text-2xl"
                           style={{ color: tech.color }}
                         />
-                        <p className="mt-2 text-xs text-gray-300 font-medium text-center leading-tight">
+                        <p className="mt-2 text-xs text-muted-foreground font-medium text-center leading-tight">
                           {tech.name}
                         </p>
                       </div>

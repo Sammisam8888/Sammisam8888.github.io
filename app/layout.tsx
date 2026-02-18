@@ -4,6 +4,8 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import BackgroundFX from "@/components/BackgroundFX";
 import Cursor from "@/components/Cursor";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -76,11 +78,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased text-foreground relative`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground relative selection:bg-purple-500/30 selection:text-current`}
       >
-        <BackgroundFX />
-        <Cursor />
-        <SmoothScroll>{children}</SmoothScroll>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="fixed top-6 right-6 z-[9999]">
+            <ThemeToggle />
+          </div>
+          <BackgroundFX />
+          <Cursor />
+          <SmoothScroll>{children}</SmoothScroll>
+        </ThemeProvider>
       </body>
     </html>
   );
