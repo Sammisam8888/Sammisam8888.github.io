@@ -23,10 +23,10 @@ export default function Projects() {
       description:
         "Designed and trained CNN-based classifier to detect AI-generated vs real images. Built preprocessing pipeline, implemented adversarial robustness testing, optimized model performance, and deployed training + inference scripts.",
       tech: [
-        { name: "Python", icon: SiPython },
-        { name: "PyTorch", icon: SiPytorch },
-        { name: "NumPy", icon: SiNumpy },
-        { name: "OpenCV", icon: SiOpencv },
+        { name: "Python", icon: SiPython, color: "#3776AB" },
+        { name: "PyTorch", icon: SiPytorch, color: "#EE4C2C" },
+        { name: "NumPy", icon: SiNumpy, color: "#013243" },
+        { name: "OpenCV", icon: SiOpencv, color: "#5C3EE8" },
       ],
       github: "https://github.com/Sammisam8888/ml-hackathon-iitbbs2025",
     },
@@ -36,9 +36,9 @@ export default function Projects() {
       description:
         "Designed offline-first scalable architecture, implemented adaptive learning algorithms, built game engine integrations using Flutter + Flame, managed state via Riverpod, and deployed multilingual production support.",
       tech: [
-        { name: "Flutter", icon: SiFlutter },
-        { name: "Dart", icon: SiDart },
-        { name: "React", icon: SiReact },
+        { name: "Flutter", icon: SiFlutter, color: "#02569B" },
+        { name: "Dart", icon: SiDart, color: "#0175C2" },
+        { name: "React", icon: SiReact, color: "#61DAFB" },
       ],
       github:
         "https://github.com/SIH-2025-TEAM-VSSUT/gamified-learning-rural-india",
@@ -49,11 +49,11 @@ export default function Projects() {
       description:
         "Architected JWT-based authentication system, built RESTful APIs, implemented role-based dashboards, optimized MongoDB schema design, and deployed containerized infrastructure.",
       tech: [
-        { name: "Flask", icon: SiFlask },
-        { name: "Python", icon: SiPython },
-        { name: "MongoDB", icon: SiMongodb },
-        { name: "React", icon: SiReact },
-        { name: "Docker", icon: SiDocker },
+        { name: "Flask", icon: SiFlask, color: "#FFFFFF" },
+        { name: "Python", icon: SiPython, color: "#3776AB" },
+        { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+        { name: "React", icon: SiReact, color: "#61DAFB" },
+        { name: "Docker", icon: SiDocker, color: "#2496ED" },
       ],
       github:
         "https://github.com/Sammisam8888/prior-authorisation-final-project",
@@ -110,7 +110,6 @@ export default function Projects() {
 
             {/* Tech Stack Inline Buttons */}
             <div className="mt-auto pt-6 border-t border-white/10 flex flex-wrap gap-3">
-
               {project.tech.map((tech, i) => {
                 const Icon = tech.icon;
                 return (
@@ -118,12 +117,14 @@ export default function Projects() {
                     key={i}
                     className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition text-sm text-white/80"
                   >
-                    <Icon className="text-lg" />
+                    <Icon
+                      className="text-lg"
+                      style={{ color: tech.color }}
+                    />
                     <span>{tech.name}</span>
                   </div>
                 );
               })}
-
             </div>
 
           </div>
