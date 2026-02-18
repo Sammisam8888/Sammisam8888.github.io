@@ -31,7 +31,7 @@ export default function Education() {
           </h3>
 
           <p className="text-white/60 mt-3">
-            Bachelor of Technology — Computer Science & Engineering
+            Bachelor of Technology - Computer Science & Engineering
           </p>
 
           {/* Academic Metrics */}

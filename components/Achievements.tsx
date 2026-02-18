@@ -1,58 +1,79 @@
 "use client";
 
-import { Trophy, Medal, Star, Target, Linkedin } from "lucide-react";
+import { Trophy, Medal, Star, Target, Mic, Code, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Achievements() {
   const achievements = [
     {
-      title: "Winner — GDG Bhubaneswar × iServeU Hackathon (2025)",
+      title: "Winner - GDG Bhubaneswar × iServeU Hackathon (2025)",
       description:
         "Secured 1st place by engineering a fintech-grade production solution under competitive build constraints.",
       icon: Trophy,
       link: "https://www.linkedin.com/posts/sammisam8888_cathon2025-winner-iserveu-activity-7356375630483017728-7hk0",
     },
     {
-      title: "Winner — Ideathon 2024 (E-Cell, VSSUT)",
+      title: "Winner - Ideathon 2024 (E-Cell, VSSUT)",
       description:
         "Designed and pitched a sustainable technology-driven startup model validated by an entrepreneurial jury.",
       icon: Trophy,
       link: "https://drive.google.com/file/d/1RiQ9GhG_CoJY4cn21TXSKX9ovIyKJlr3/view",
     },
     {
-      title: "Winner — Maze Hunt 2024 (Robotics Society, VSSUT)",
+      title: "Winner - Maze Hunt 2024 (Robotics Society, VSSUT)",
       description:
         "Developed and optimized an autonomous robotics system for intelligent maze navigation.",
       icon: Trophy,
       link: "https://drive.google.com/file/d/16xO-N3kkN1qx4UCNxjr8VpQ4NUDPW8MS/view",
     },
     {
-      title: "Winner — Shark Tank 2.0 (SUIIT)",
+      title: "Winner - Shark Tank 2.0 (SUIIT)",
       description:
         "Pitched a scalable fintech startup concept evaluated on feasibility, architecture, and revenue sustainability.",
       icon: Trophy,
       link: "https://www.linkedin.com/posts/ecellvssut_vssut-ecellvssut-activity-7246912574728912897-B7Rn",
     },
     {
-      title: "Finalist — Udbhavanam 2024 (IIM Sambalpur)",
+      title: "Finalist - Udbhavanam 2024 (IIM Sambalpur)",
       description:
         "Presented a structured stock-market education model focused on scalable financial literacy adoption.",
       icon: Star,
       link: null,
     },
     {
-      title: "All-India Rank 60 — E-Yantra Robotics 2024 (IIT Bombay)",
+      title: "All-India Rank 60 - E-Yantra Robotics 2024 (IIT Bombay)",
       description:
         "Achieved national-level recognition in advanced robotics and embedded systems engineering challenge.",
       icon: Medal,
       link: null,
     },
     {
-      title: "Participant — ML Hackathon 2025 (IIT Bhubaneswar)",
+      title: "Participant - ML Hackathon 2025 (IIT Bhubaneswar)",
       description:
         "Built an AI-based image authenticity detection system within competitive time constraints.",
       icon: Target,
       link: "https://www.linkedin.com/posts/sammisam8888_certificate-iit-bbs-ml-hackathon-activity-7321148450711003139-l9Y3",
+    },
+    {
+      title: "Participant - National Debate (Mewar University)",
+      description:
+        "Represented VSSUT at the All India Shri Nandlal Gadiya Memorial Debate, engaging in critical analysis of complex national issues.",
+      icon: Mic,
+      link: "https://drive.google.com/file/d/1MNYcHCZjNRME-6aTXK4FyACZo-1fANVu/view?usp=sharing",
+    },
+    {
+      title: "Consolation Prize - National Oratory Contest (YUGMA)",
+      description:
+        "Awarded for excellence in National-level Oratory at Astha School of Management, showcasing strong communication and public speaking skills.",
+      icon: Mic,
+      link: "https://drive.google.com/file/d/1tDC_pr-1MM6okrtTWr7lUd8hGuEtudMV/view?usp=sharing",
+    },
+    {
+      title: "Participant - ENCIDE MACE Coding Competition",
+      description:
+        "Participated in collaborative problem-solving and algorithmic programming competition.",
+      icon: Code,
+      link: "https://www.linkedin.com/posts/sammisam8888_certificate-of-participation-activity-7258092582675611649-Hh-5",
     },
   ];
 
@@ -105,9 +126,9 @@ export default function Achievements() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="absolute top-8 right-8 text-white/40 hover:text-blue-400 transition-colors"
-                    title="View Proof on LinkedIn"
+                    title="View Credential"
                   >
-                    <Linkedin size={24} />
+                    <ExternalLink size={24} />
                   </a>
                 )}
               </div>

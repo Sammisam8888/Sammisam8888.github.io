@@ -36,7 +36,7 @@ export default function Contact() {
               {/* Email */}
               <a
                 href="mailto:samuelpriyatamxd@gmail.com"
-                className="group flex items-center gap-4 text-2xl md:text-4xl font-semibold text-white hover:text-white/70 transition break-all"
+                className="group flex items-center gap-4 text-[clamp(16px,5vw,36px)] md:text-4xl font-semibold text-white hover:text-white/70 transition whitespace-nowrap"
               >
                 <span>samuelpriyatamxd@gmail.com</span>
                 <ArrowUpRight className="shrink-0 w-8 h-8 md:w-10 md:h-10 group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" />

@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | Samuel Priyatam Dash",
   },
   description:
-    "Samuel Priyatam Dash — Full-Stack & AI Systems Engineer specializing in scalable cloud architectures, AI-driven systems, DevOps, and production-grade web platforms.",
+    "Samuel Priyatam Dash - Full-Stack & AI Systems Engineer specializing in scalable cloud architectures, AI-driven systems, DevOps, and production-grade web platforms.",
   keywords: [
     "Samuel Priyatam Dash",
     "Full Stack Engineer",

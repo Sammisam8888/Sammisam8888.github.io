@@ -25,7 +25,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center px-[6vw] md:px-[10vw] overflow-hidden"
+      className="relative min-h-screen flex items-center px-6 md:px-[10vw] overflow-hidden"
     >
       {/* Subtle Radial Background */}
       <motion.div
@@ -48,7 +48,7 @@ export default function Hero() {
       {/* MAIN GRID */}
       <motion.div
         style={{ opacity: contentOpacity, y: contentY }}
-        className="relative z-10 grid md:grid-cols-2 gap-20 items-center w-full max-w-7xl mx-auto"
+        className="relative z-10 grid md:grid-cols-2 gap-12 md:gap-20 items-center w-full max-w-7xl mx-auto"
       >
         {/* LEFT SIDE */}
         <div>
@@ -65,7 +65,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="mt-6 text-[clamp(48px,6vw,84px)] font-black leading-[1.05] tracking-[-0.04em] text-white"
+            className="mt-6 text-[clamp(40px,8vw,84px)] font-black leading-[1.05] tracking-[-0.04em] text-white"
           >
             Samuel Priyatam <br />
             <span className="text-white/60">Dash</span>
@@ -87,7 +87,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="mt-12 flex items-center gap-8"
+            className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8"
           >
             {/* View Work */}
             <a
