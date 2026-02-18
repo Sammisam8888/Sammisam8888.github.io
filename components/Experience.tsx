@@ -1,0 +1,251 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { Brain, Network } from "lucide-react";
+
+import Image from "next/image";
+import {
+  SiReact,
+  SiDjango,
+  SiExpress,
+  SiFlask,
+  SiMongodb,
+  SiAmazon,
+  SiNextdotjs,
+  SiAngular,
+  SiPython,
+  SiFastapi,
+  SiPostgresql,
+  SiFlutter,
+  SiOpenai,
+  SiWhatsapp,
+  SiGoogle,
+} from "react-icons/si";
+import { Bot } from "lucide-react";
+
+const AzureIcon = () => (
+  <div className="relative w-9 h-9">
+    <Image
+      src="/tech/azure.svg"
+      alt="Azure"
+      fill
+      className="object-contain"
+    />
+  </div>
+);
+
+const experiences = [
+  {
+    id: "exp1",
+    dateLabel: "Aug 2025 - Dec 2025",
+    role: "SDE 2 Project Lead (Full-Stack & DevOps)",
+    company: "OPM Corporation",
+    statement:
+      "Led client-facing full-stack architecture as Project Lead, designing scalable production systems across AWS & Azure infrastructure. Owned backend architecture, DevOps strategy, WhatsApp Business automation, and cross-team delivery while driving production reliability and cloud-native scalability.",
+    metric: "45%",
+    tech: [
+      { name: "React Native", icon: SiReact, color: "#61DAFB" },
+      { name: "Django", icon: SiDjango, color: "#0C4B33" },
+      { name: "Express", icon: SiExpress, color: "#ffffff" },
+      { name: "Flask", icon: SiFlask, color: "#ffffff" },
+      { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+      { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
+      { name: "AWS (EC2, S3, Amplify, Lightsail)", icon: SiAmazon, color: "#FF9900" },
+      { name: "Azure", icon: AzureIcon, color: "#007FFF" },
+      { name: "Next.js", icon: SiNextdotjs, color: "#ffffff" },
+      { name: "WhatsApp Business API", icon: SiWhatsapp, color: "#25D366" },
+      { name: "WhatsApp Chatbot", icon: Bot, color: "#22c55e" },
+    ],
+  },
+  {
+    id: "exp2",
+    dateLabel: "Jul 2025 - Aug 2025",
+    role: "AI Full-Stack Engineer",
+    company: "WNS Global Services",
+    statement:
+      "Architected healthcare prior-authorization automation platform using multi-agent AI systems. Integrated OpenAI, Gemini, LangChain & LangGraph into secure full-stack production architecture with CI/CD pipelines and system design ownership.",
+    metric: "100%",
+    tech: [
+      { name: "Angular", icon: SiAngular, color: "#DD0031" },
+      { name: "React", icon: SiReact, color: "#61DAFB" },
+      { name: "Next.js", icon: SiNextdotjs, color: "#ffffff" },
+      { name: "Flask", icon: SiFlask, color: "#ffffff" },
+      { name: "Express", icon: SiExpress, color: "#ffffff" },
+      { name: "OpenAI", icon: SiOpenai, color: "#10A37F" },
+      { name: "Gemini API", icon: SiGoogle, color: "#4285F4" },
+      { name: "LangChain", icon: Brain, color: "#16a34a" },
+      { name: "LangGraph", icon: Network, color: "#9333ea" },
+      { name: "System Architecture", icon: Bot, color: "#facc15" },
+    ],
+  },
+  {
+    id: "exp3",
+    dateLabel: "May 2025 - Jul 2025",
+    role: "Cloud Platform Developer",
+    company: "Inovaare Clouds",
+    statement:
+      "Engineered scalable PaaS platform architecture enabling modular product creation. Implemented AWS Lambda, S3, OCR pipelines, MLOps workflows, KPI/API documentation, and enterprise-grade system architecture.",
+    metric: "40%",
+    tech: [
+      { name: "AWS Lambda", icon: SiAmazon, color: "#FF9900" },
+      { name: "AWS S3", icon: SiAmazon, color: "#FF9900" },
+      { name: "Python", icon: SiPython, color: "#3776AB" },
+      { name: "OCR", icon: Bot, color: "#22d3ee" },
+      { name: "Machine Learning", icon: Bot, color: "#a855f7" },
+      { name: "MLOps", icon: Bot, color: "#10b981" },
+      { name: "PaaS Architecture", icon: Bot, color: "#eab308" },
+    ],
+  },
+  {
+    id: "exp4",
+    dateLabel: "Jan 2025 - Mar 2025",
+    role: "Backend Engineer",
+    company: "Codecis AI",
+    statement:
+      "Built fintech-oriented backend systems with containerized infrastructure, optimized multi-database pipelines (PostgreSQL, MongoDB, MySQL), scalable API design, and cloud deployment strategy.",
+    metric: "30%",
+    tech: [
+      { name: "Flutter", icon: SiFlutter, color: "#02569B" },
+      { name: "React Native", icon: SiReact, color: "#61DAFB" },
+      { name: "React", icon: SiReact, color: "#61DAFB" },
+      { name: "Next.js", icon: SiNextdotjs, color: "#ffffff" },
+      { name: "FastAPI", icon: SiFastapi, color: "#009688" },
+      { name: "Flask", icon: SiFlask, color: "#ffffff" },
+      { name: "Django", icon: SiDjango, color: "#0C4B33" },
+      { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+      { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
+      { name: "MySQL", icon: SiPostgresql, color: "#00758F" },
+    ],
+  },
+];
+
+export default function ExperienceTimeline() {
+  const [active, setActive] = useState("exp1");
+  const refs = useRef<{ [key: string]: HTMLElement | null }>({});
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-45% 0px -45% 0px" }
+    );
+
+    Object.values(refs.current).forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    const element = refs.current[id];
+    if (!element) return;
+
+    const y =
+      element.getBoundingClientRect().top +
+      window.pageYOffset -
+      window.innerHeight / 2 +
+      element.offsetHeight / 2;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
+
+  return (
+    <section className="py-32 px-6 relative">
+
+      {/* HEADER */}
+      <div className="text-center mb-24">
+        <h1 className="text-5xl font-bold tracking-tight">
+          Work Experience
+        </h1>
+        <p className="text-muted-foreground mt-4">
+          Full-Stack Engineering • Cloud Architecture • AI Systems • DevOps Leadership
+        </p>
+      </div>
+
+      <div className="max-w-7xl mx-auto grid md:grid-cols-[240px_1fr] gap-20">
+
+        {/* Sticky Timeline */}
+        <div className="relative">
+          <div className="sticky top-1/2 -translate-y-1/2 space-y-5">
+            {experiences.map((exp) => (
+              <button
+                key={exp.id}
+                onClick={() => scrollToSection(exp.id)}
+                className={`w-full px-5 py-3 rounded-xl backdrop-blur-xl border border-border transition ${
+                  active === exp.id
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary/50 text-muted-foreground hover:bg-secondary"
+                }`}
+              >
+                {exp.dateLabel}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="relative">
+
+          {/* LINE PERFECTLY ALIGNED */}
+          <div className="absolute left-8 top-8 bottom-8 w-[2px] bg-border" />
+
+          {experiences.map((exp) => (
+            <div
+              key={exp.id}
+              id={exp.id}
+              ref={(el) => { refs.current[exp.id] = el; }}
+              className="relative pl-20 mb-32"
+            >
+              <div className="absolute left-5 top-8 w-5 h-5 bg-foreground rounded-full" />
+
+              <div className="backdrop-blur-xl bg-card border border-border p-6 md:p-12 rounded-2xl shadow-sm relative">
+
+                <div className="absolute right-10 top-8 text-6xl font-bold text-foreground/5">
+                  {exp.metric}
+                </div>
+
+                <p className="text-sm text-muted-foreground">{exp.dateLabel}</p>
+                <h2 className="text-3xl font-semibold mt-2">{exp.role}</h2>
+                <p className="text-muted-foreground mb-8">{exp.company}</p>
+
+                <p className="text-base text-muted-foreground leading-relaxed max-w-3xl">
+                  {exp.statement}
+                </p>
+
+                <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {exp.tech.map((tech, idx) => {
+                    const Icon = tech.icon;
+                    return (
+                      <div
+                        key={idx}
+                        className="flex flex-col items-center bg-secondary/50 border border-border px-4 py-4 rounded-lg hover:bg-secondary transition"
+                      >
+                        <Icon
+                          className="text-2xl"
+                          style={{ color: tech.color }}
+                        />
+                        <p className="mt-2 text-xs text-muted-foreground font-medium text-center leading-tight">
+                          {tech.name}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+
+
+
+
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
