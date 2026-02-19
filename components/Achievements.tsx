@@ -1,6 +1,7 @@
 "use client";
 
 import { Trophy, Medal, Star, Target, Mic, Code, ExternalLink } from "lucide-react";
+import { SiLinkedin, SiGoogledrive } from "react-icons/si";
 import { motion } from "framer-motion";
 
 export default function Achievements() {
@@ -77,6 +78,12 @@ export default function Achievements() {
     },
   ];
 
+  const getLinkIcon = (link: string) => {
+    if (link.includes("linkedin.com")) return <SiLinkedin size={24} />;
+    if (link.includes("drive.google.com") || link.includes("docs.google.com")) return <SiGoogledrive size={24} />;
+    return <ExternalLink size={24} />;
+  };
+
   return (
     <section className="py-32 px-6 relative">
 
@@ -111,26 +118,28 @@ export default function Achievements() {
               </div>
 
               {/* Content */}
-              <div>
-                <h3 className="text-lg font-semibold text-foreground leading-tight">
-                  {item.title}
-                </h3>
+              <div className="flex-1 min-w-0">
+                <div className="flex justify-between items-start gap-4">
+                  <h3 className="text-lg font-semibold text-foreground leading-tight">
+                    {item.title}
+                  </h3>
+
+                  {item.link && (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="shrink-0 text-muted-foreground hover:text-blue-400 transition-colors"
+                      title="View Credential"
+                    >
+                      {getLinkIcon(item.link)}
+                    </a>
+                  )}
+                </div>
 
                 <p className="text-muted-foreground text-sm mt-2 leading-relaxed">
                   {item.description}
                 </p>
-
-                {item.link && (
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute top-8 right-8 text-muted-foreground hover:text-blue-400 transition-colors"
-                    title="View Credential"
-                  >
-                    <ExternalLink size={24} />
-                  </a>
-                )}
               </div>
             </div>
           </motion.div>

@@ -96,7 +96,7 @@ export default function Contact() {
 
         {/* Bottom Footer Line */}
         <div className="mt-20 pt-10 border-t border-border text-muted-foreground text-sm font-mono flex flex-col md:flex-row justify-between gap-4">
-          <p>© 2026 Samuel Priyatam Dash. All Rights Reserved.</p>
+          {/* <p>© 2026 Samuel Priyatam Dash. All Rights Reserved.</p> */}
           <p>Full-Stack Engineering • AI Systems • Cloud Architecture</p>
         </div>
 
