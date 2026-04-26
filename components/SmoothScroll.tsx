@@ -27,9 +27,18 @@ if (typeof window !== "undefined") {
 let lenis: Lenis | null = null;
 let rafId: number | null = null;
 
+function isTouchDevice() {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(pointer: coarse)").matches;
+}
+
 function startLenis() {
   if (lenis) return;
-  lenis = new Lenis({ duration: 1.5, smoothWheel: true });
+  // Skip Lenis on touch devices — native momentum scroll is far smoother
+  // than wheel-emulation on phones/tablets, and saves the perf cost.
+  if (isTouchDevice()) return;
+
+  lenis = new Lenis({ duration: 1.2, smoothWheel: true });
   window.__lenis = lenis;
 
   const raf = (time: number) => {

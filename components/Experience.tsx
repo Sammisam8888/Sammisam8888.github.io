@@ -273,7 +273,7 @@ export default function ExperienceTimeline() {
   };
 
   return (
-    <section className="py-16 md:py-32 px-4 md:px-6 relative">
+    <section id="experience" className="py-16 md:py-32 px-4 md:px-6 relative">
       {/* HEADER */}
       <div className="text-center mb-12 md:mb-24">
         <p className="text-[10px] md:text-xs font-mono uppercase tracking-[0.3em] text-muted-foreground mb-3 md:mb-4">

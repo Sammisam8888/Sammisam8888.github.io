@@ -66,10 +66,10 @@ export default function Hero() {
       {/* MAIN GRID */}
       <motion.div
         style={{ opacity: contentOpacity, y: contentY }}
-        className="relative z-10 grid md:grid-cols-2 gap-12 md:gap-20 items-center w-full max-w-7xl mx-auto"
+        className="relative z-10 grid md:grid-cols-2 gap-8 md:gap-20 items-center w-full max-w-7xl mx-auto"
       >
-        {/* LEFT SIDE */}
-        <div>
+        {/* LEFT SIDE — text. On mobile it sits below the photo. */}
+        <div className="order-2 md:order-1">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -109,7 +109,18 @@ export default function Hero() {
           >
             {/* View Work */}
             <a
-              href="#projects"
+              href="#experience"
+              onClick={(e) => {
+                const target = document.getElementById("experience");
+                if (!target) return;
+                e.preventDefault();
+                const lenis = window.__lenis;
+                if (lenis) {
+                  lenis.scrollTo(target, { duration: 1.2 });
+                } else {
+                  target.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+              }}
               className="group relative px-8 py-[14px] rounded-full text-primary-foreground transition-all duration-300 overflow-hidden border border-primary bg-primary hover:bg-primary/90"
             >
               <span className="relative z-10">View Work</span>
@@ -128,14 +139,14 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* RIGHT SIDE - PROFILE IMAGE */}
+        {/* RIGHT SIDE - PROFILE IMAGE. On mobile it appears above the text. */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="hidden md:flex justify-center md:justify-end relative z-10"
+          className="flex justify-center md:justify-end relative z-10 order-1 md:order-2"
         >
-          <div className="relative w-[320px] h-[420px]">
+          <div className="relative w-[220px] h-[290px] md:w-[320px] md:h-[420px]">
 
             {/* Animated Frame */}
             <motion.div
