@@ -119,6 +119,7 @@ export default function Hero() {
             <a
               href="https://tinyurl.com/samuel-priyatam-resume"
               target="_blank"
+              rel="noopener noreferrer"
               className="group relative px-8 py-[14px] rounded-full text-foreground transition-all duration-300 overflow-hidden border border-border hover:border-foreground/20 hover:bg-secondary flex items-center gap-2"
             >
               <FileText size={18} />

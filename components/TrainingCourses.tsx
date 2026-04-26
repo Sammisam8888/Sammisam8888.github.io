@@ -101,6 +101,8 @@ export default function TrainingCourses() {
             <motion.a
               key={index}
               href={course.link}
+              target="_blank"
+              rel="noopener noreferrer" 
               whileHover={{ y: -8 }}
               transition={{ type: "spring", stiffness: 200 }}
               className="min-w-[380px] max-w-[380px] h-[420px] rounded-3xl p-12
