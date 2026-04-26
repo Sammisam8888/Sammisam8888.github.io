@@ -6,7 +6,7 @@ import { motion, Variants } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [animStage, setAnimStage] = useState<"idle" | "expanding" | "fading">("idle");
   const [overlayTheme, setOverlayTheme] = useState<string | null>(null);
@@ -17,40 +17,35 @@ export function ThemeToggle() {
 
   if (!mounted) return null;
 
+  const isDark = resolvedTheme === "dark";
+
   const toggleTheme = () => {
     if (animStage !== "idle") return;
-    
-    // Determine the color of the overlay (target theme)
-    const nextTheme = theme === "dark" ? "light" : "dark";
+
+    const nextTheme = isDark ? "light" : "dark";
     setOverlayTheme(nextTheme);
     setAnimStage("expanding");
-    
-    // Theme switch happens after expansion covers screen
-    // We can rely on onAnimationComplete, or just a timer for safety + simpler logic
-    // Let's use a timer for the theme switch to ensure it happens midway
-    // Expansion takes 0.5s approx.
+
     setTimeout(() => {
-        setTheme(nextTheme);
-    }, 400); // Switch just before full expansion or at peak
+      setTheme(nextTheme);
+    }, 400);
   };
 
   const onAnimationComplete = () => {
     if (animStage === "expanding") {
-        setAnimStage("fading");
+      setAnimStage("fading");
     } else if (animStage === "fading") {
-        setAnimStage("idle");
-        setOverlayTheme(null);
+      setAnimStage("idle");
+      setOverlayTheme(null);
     }
   };
 
-  // Safe color lookup
-  const overlayColor = overlayTheme === "light" ? "#FAFAFA" : "#0A0A0A"; 
+  const overlayColor = overlayTheme === "light" ? "#FAFAFA" : "#0A0A0A";
 
-  // Variants for the overlay
   const variants: Variants = {
     idle: { scale: 0, opacity: 0 },
     expanding: { scale: 150, opacity: 1, transition: { duration: 0.5, ease: "easeIn" } },
-    fading: { scale: 150, opacity: 0, transition: { duration: 0.3, ease: "easeOut" } }, // Fade out while keeping size
+    fading: { scale: 150, opacity: 0, transition: { duration: 0.3, ease: "easeOut" } },
   };
 
   return (
@@ -62,10 +57,10 @@ export function ThemeToggle() {
       >
         <div className="relative w-6 h-6">
           <motion.div
-            initial={{ rotate: 0, scale: 1 }}
+            initial={false}
             animate={{
-              rotate: theme === "dark" ? 0 : 90,
-              scale: theme === "dark" ? 1 : 0,
+              rotate: isDark ? 0 : 90,
+              scale: isDark ? 1 : 0,
             }}
             transition={{ duration: 0.2 }}
             className="absolute inset-0 flex items-center justify-center"
@@ -74,10 +69,10 @@ export function ThemeToggle() {
           </motion.div>
 
           <motion.div
-            initial={{ rotate: -90, scale: 0 }}
+            initial={false}
             animate={{
-              rotate: theme === "dark" ? -90 : 0,
-              scale: theme === "dark" ? 0 : 1,
+              rotate: isDark ? -90 : 0,
+              scale: isDark ? 0 : 1,
             }}
             transition={{ duration: 0.2 }}
             className="absolute inset-0 flex items-center justify-center"
@@ -88,19 +83,18 @@ export function ThemeToggle() {
         <span className="sr-only">Toggle theme</span>
       </button>
 
-      {/* Transition Overlay */}
       {animStage !== "idle" && (
         <motion.div
-            initial="idle"
-            animate={animStage}
-            variants={variants}
-            onAnimationComplete={onAnimationComplete}
-            style={{ 
-                backgroundColor: overlayColor,
-                top: "36px",
-                right: "36px",
-            }}
-            className="fixed w-4 h-4 rounded-full z-[90] pointer-events-none"
+          initial="idle"
+          animate={animStage}
+          variants={variants}
+          onAnimationComplete={onAnimationComplete}
+          style={{
+            backgroundColor: overlayColor,
+            top: "36px",
+            right: "36px",
+          }}
+          className="fixed w-4 h-4 rounded-full z-[90] pointer-events-none"
         />
       )}
     </>

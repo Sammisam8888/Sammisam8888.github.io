@@ -5,6 +5,7 @@ import Projects from "@/components/Projects";
 import TrainingCourses from "@/components/TrainingCourses";
 import Achievements from "@/components/Achievements";
 import Contact from "@/components/Contact";
+import AutoTour from "@/components/AutoTour";
 
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <Achievements />
       <TrainingCourses />
       <Contact />
+      <AutoTour />
     </main>
   );
 }

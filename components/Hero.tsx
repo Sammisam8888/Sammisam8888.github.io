@@ -35,13 +35,31 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_40%,rgb(var(--foreground)/0.03),transparent_65%)]" />
       </motion.div>
 
-      {/* GHOST TEXT (Now Behind Everything) */}
+      {/* GHOST TEXT — scattered, never behind the profile photo */}
       <motion.div
         style={{ y: ghostY, opacity: ghostOpacity }}
-        className="absolute top-[15%] left-1/2 -translate-x-1/2 z-0 pointer-events-none select-none"
+        className="absolute top-[8%] -left-[5%] z-0 pointer-events-none select-none"
       >
-        <h1 className="font-extrabold text-[clamp(100px,15vw,260px)] tracking-[-0.05em] text-foreground/5 whitespace-nowrap">
+        <h1 className="font-extrabold text-[clamp(70px,10vw,200px)] tracking-[-0.05em] text-foreground/[0.04] whitespace-nowrap">
           SYSTEMS
+        </h1>
+      </motion.div>
+
+      <motion.div
+        style={{ y: ghostY, opacity: ghostOpacity }}
+        className="hidden lg:block absolute top-[6%] right-[4%] z-0 pointer-events-none select-none"
+      >
+        <h1 className="font-extrabold text-[clamp(40px,5vw,110px)] tracking-[-0.05em] text-foreground/[0.04] whitespace-nowrap">
+          AI · CLOUD
+        </h1>
+      </motion.div>
+
+      <motion.div
+        style={{ y: ghostY, opacity: ghostOpacity }}
+        className="hidden md:block absolute bottom-[6%] -left-[2%] z-0 pointer-events-none select-none"
+      >
+        <h1 className="font-extrabold text-[clamp(40px,6vw,130px)] tracking-[-0.05em] text-foreground/[0.04] whitespace-nowrap">
+          ARCHITECT
         </h1>
       </motion.div>
 
